@@ -4,7 +4,6 @@ class Maze
 
   def initialize
     @current_step = 1
-    @field = Array.new
     @count_field = Array.new($field.length).map{Array.new($field[0].length, -1)}
     @start_pos = Hash.new
     @goal_pos = Hash.new
@@ -114,7 +113,7 @@ class Maze
       return
     end
 
- end
+  end
 
   def next_step
     @current_step += 1
