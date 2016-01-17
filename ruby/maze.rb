@@ -1,4 +1,3 @@
-st = Time.now
 require './route'
 
 class Maze
@@ -136,4 +135,3 @@ end
 
 m = Maze.new
 m.print_field
-p "処理概要 #{Time.now - st}s"
