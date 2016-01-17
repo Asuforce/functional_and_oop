@@ -1,1 +1,1 @@
-maze.txt
+../haskell/maze.txt
