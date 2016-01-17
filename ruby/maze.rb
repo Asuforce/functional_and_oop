@@ -127,8 +127,6 @@ class Maze
 
 end
 
-st = Time.now
 m = Maze.new
 m.search_root
 m.print_field
-puts Time.now - st

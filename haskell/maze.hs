@@ -1,5 +1,3 @@
-import Data.Time
-
 type Pos = (Int,Int)
 type Path = [Pos]
 
@@ -20,12 +18,12 @@ findPos mz c =
       | otherwise  = findX xs c (n+1)
 
 canMove :: [String] -> Pos -> Bool
-canMove mz (x, y)
+canMove mz (x,y)
   | mz !! y !! x == '*' = False
   | otherwise           = True
 
 nextSteps :: [String] -> Pos -> [Pos]
-nextSteps mz (x, y) = filter (canMove mz) [(x-1, y), (x+1, y), (x, y-1), (x, y+1)]
+nextSteps mz (x,y) = filter (canMove mz) [(x-1,y), (x+1,y), (x,y-1), (x,y+1)]
 
 getPath :: [String] -> Pos -> [Path] -> Path
 getPath _ _ [] = fail "no Path"
@@ -55,7 +53,6 @@ buildX mz pt (x:xs) y = getMap mz pt (x, y) : buildX mz pt xs y
         w = length $ head mz
 
 main = do
-  x <- getCurrentTime
   mazeTxt <- readFile "maze.txt"
   let maze = lines mazeTxt
       h = length maze
@@ -65,5 +62,3 @@ main = do
       path  = getPath maze goal [ x : [start] | x <- nextSteps maze start]
       result = buildY maze path [0..w] [0..h-1]
   putStrLn result
-  y <- getCurrentTime
-  print $ diffUTCTime y x
