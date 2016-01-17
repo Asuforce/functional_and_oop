@@ -35,27 +35,24 @@ getPath mz p1 ap@(path:queue)
   where
     p0 = head path
 
-buildY :: [String] -> [Int] -> [Int] -> String
-buildY _ _ [] = []
-buildY mz x (y:ys) = buildX mz x y ++ buildY mz x ys
+buildY :: [String] -> Path -> [Int] -> [Int] -> String
+buildY _ _ _ [] = []
+buildY mz pt x (y:ys) = buildX mz pt x y ++ buildY mz pt x ys
 
-buildX :: [String] -> [Int] -> Int -> String
-buildX _ [] _ = []
-buildX mz (x:xs) y = getMap mz (x, y) : buildX mz xs y
+buildX :: [String] -> Path -> [Int] -> Int -> String
+buildX _ _ [] _ = []
+buildX mz pt (x:xs) y = getMap mz pt (x, y) : buildX mz pt xs y
   where
-    getMap :: [String] -> Pos -> Char
-    getMap mz (x, y)
+    getMap :: [String] -> Path -> Pos -> Char
+    getMap mz pt (x, y)
       | x == w = '\n'
       | mz !! y !! x == '*' = '*'
       | mz !! y !! x == 'S' = 'S'
       | mz !! y !! x == 'G' = 'G'
-      | (x, y) `elem` path = '@'
+      | (x, y) `elem` pt = '@'
       | otherwise = ' '
       where
         w = length $ head mz
-        start = findPos mz 'S'
-        goal  = findPos mz 'G'
-        path  = getPath mz goal [ x : [start] | x <- nextSteps mz start]
 
 main = do
   x <- getCurrentTime
@@ -63,7 +60,10 @@ main = do
   let maze = lines mazeTxt
       h = length maze
       w = length $ head maze
-      result = buildY maze [0..w] [0..h-1]
+      start = findPos maze 'S'
+      goal  = findPos maze 'G'
+      path  = getPath maze goal [ x : [start] | x <- nextSteps maze start]
+      result = buildY maze path [0..w] [0..h-1]
   putStrLn result
   y <- getCurrentTime
   print $ diffUTCTime y x
