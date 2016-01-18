@@ -10,13 +10,13 @@ end
 
 class Japanese < Human
   def hello
-    print "よろしく、#{@name} です。\n\n"
+    print "よろしく、#{@name} です。\n"
   end
 end
 
 class Filipino < Human
   def hello
-    print "Pagbati, ang pangalan ko ay #{@name} b.\n"
+    print "Pagbati, ang pangalan ko ay #{@name}.\n"
   end
 end
 
@@ -25,10 +25,10 @@ def whoareyou(who)
   who.hello
 end
 
-nishituji = Filipino.new("ニシツジ")
+shun = Filipino.new("Shun")
 itiki = Japanese.new("イチキ")
 
-whoareyou(nishituji)
-# 初めましてニシツジと申します。
+whoareyou(shun)
+# -> Hello, ito ay Shun.
 whoareyou(itiki)
-# よろしく、イチキです。
+# -> よろしく、イチキ です。
