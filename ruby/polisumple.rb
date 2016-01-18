@@ -18,8 +18,10 @@ def whoareyou(who)
   who.hello
 end
 
-nishituji = Person.new("西辻　スン")
-itiki = Friend.new("イチジ")
+nishituji = Person.new("ニシツジ")
+itiki = Friend.new("イチキ")
 
 whoareyou(nishituji)
+# 初めましてニシツジと申します。
 whoareyou(itiki)
+# よろしく、イチキです。
